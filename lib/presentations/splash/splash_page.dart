@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sales_app/common/constants/preference_key.dart';
 import 'package:sales_app/common/constants/route_constant.dart';
-import '../../data/datasources/local/cache/app_sharepreference.dart';
+import '../../data/local/cache/app_sharepreference.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});

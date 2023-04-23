@@ -1,4 +1,4 @@
-import 'package:sales_app/data/datasources/models/product_model.dart';
+import 'package:sales_app/data/models/product_model.dart';
 
 class CartModel {
   

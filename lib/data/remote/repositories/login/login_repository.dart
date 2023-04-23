@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:sales_app/common/constants/api_constant.dart';
-import 'package:sales_app/data/datasources/remote/dto/response/login/login_response_dto/login_response_dto.dart';
+import 'package:sales_app/data/remote/dto/response/login/login_response_dto/login_response_dto.dart';
 import '../../dto/request/login/login_request_dto.dart';
 import '../../dto/response/base_response_dto.dart';
 import '../../restapi/rest_api.dart';
