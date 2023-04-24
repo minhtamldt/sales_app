@@ -19,8 +19,8 @@ class LoginContainer extends StatefulWidget {
 
 class _LoginContainerState extends State<LoginContainer> {
  late LoginBloc _bloc;
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -31,11 +31,14 @@ class _LoginContainerState extends State<LoginContainer> {
         MessageUtils.showMessage(context, "Alert!!", event.toString());
       });
     });
+    _emailController.text = "tamtm_test02@gmail.com";
+    _passwordController.text = "1234567890";
+
   }
 
   void onPressSignIn() {
-    String email = emailController.text.toString();
-    String password = passwordController.text.toString();
+    String email = _emailController.text.toString();
+    String password = _passwordController.text.toString();
 
     if (email.isEmpty || password.isEmpty) return;
     _bloc.executeSignIn(LoginEvent(email: email, password: password));
@@ -68,26 +71,24 @@ class _LoginContainerState extends State<LoginContainer> {
                               Image.asset("assets/images/ic_food_express.png")),
                       Expanded(
                         flex: 4,
-                        child: Container(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: DimensionUtils
-                                        .paddingHeightDivideNumber(context)),
-                                child: _buildEmailTextField(),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: DimensionUtils
-                                        .paddingHeightDivideNumber(context)),
-                                child: _buildPasswordTextField(),
-                              ),
-                              _buildButtonSignIn(onPressSignIn),
-                            ],
-                          ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: DimensionUtils
+                                      .paddingHeightDivideNumber(context)),
+                              child: _buildEmailTextField(),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: DimensionUtils
+                                      .paddingHeightDivideNumber(context)),
+                              child: _buildPasswordTextField(),
+                            ),
+                            _buildButtonSignIn(onPressSignIn),
+                          ],
                         ),
                       ),
                       Expanded(child: _buildTextSignUp())
@@ -104,19 +105,19 @@ class _LoginContainerState extends State<LoginContainer> {
 
   Widget _buildTextSignUp() {
     return Container(
-        margin: EdgeInsets.only(left: 10, right: 10),
+        margin: const EdgeInsets.only(left: 10, right: 10),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Don't have an account!"),
+            const Text("Don't have an account!"),
             InkWell(
               onTap: () async {
                 try {
                   var data = await Navigator.pushNamed(context, RouteConstant.SIGN_UP) as Map;
                   setState(() {
-                    emailController.text = data["email"];
-                    passwordController.text = data["password"];
+                    _emailController.text = data["email"];
+                    _passwordController.text = data["password"];
                     MessageUtils.showMessage(context, "Alert!!", data["message"]);
                   });
                 } catch (e) {
@@ -124,7 +125,7 @@ class _LoginContainerState extends State<LoginContainer> {
                   return;
                 }
               },
-              child: Text("Sign Up",
+              child: const Text("Sign Up",
                   style: TextStyle(
                       color: Colors.red, decoration: TextDecoration.underline)),
             )
@@ -134,27 +135,27 @@ class _LoginContainerState extends State<LoginContainer> {
 
   Widget _buildEmailTextField() {
     return Container(
-      margin: EdgeInsets.only(left: 10, right: 10),
+      margin: const EdgeInsets.only(left: 10, right: 10),
       child: TextField(
         maxLines: 1,
-        controller: emailController,
+        controller: _emailController,
         keyboardType: TextInputType.emailAddress,
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
           fillColor: Colors.black12,
           filled: true,
           hintText: "Email",
-          labelStyle: TextStyle(color: Colors.blue),
+          labelStyle: const TextStyle(color: Colors.blue),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),
-              borderSide: BorderSide(width: 0, color: Colors.black12)),
+              borderSide: const BorderSide(width: 0, color: Colors.black12)),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),
-              borderSide: BorderSide(width: 0, color: Colors.black12)),
+              borderSide: const BorderSide(width: 0, color: Colors.black12)),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),
-              borderSide: BorderSide(width: 0, color: Colors.black12)),
-          prefixIcon: Icon(Icons.email, color: Colors.blue),
+              borderSide: const BorderSide(width: 0, color: Colors.black12)),
+          prefixIcon: const Icon(Icons.email, color: Colors.blue),
         ),
       ),
     );
@@ -162,11 +163,11 @@ class _LoginContainerState extends State<LoginContainer> {
 
   Widget _buildPasswordTextField() {
     return Container(
-      margin: EdgeInsets.only(left: 10, right: 10),
+      margin: const EdgeInsets.only(left: 10, right: 10),
       child: TextField(
         maxLines: 1,
         obscureText: true,
-        controller: passwordController,
+        controller: _passwordController,
         keyboardType: TextInputType.text,
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(
@@ -175,15 +176,15 @@ class _LoginContainerState extends State<LoginContainer> {
           hintText: "PassWord",
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),
-              borderSide: BorderSide(width: 0, color: Colors.black12)),
+              borderSide: const BorderSide(width: 0, color: Colors.black12)),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),
-              borderSide: BorderSide(width: 0, color: Colors.black12)),
+              borderSide: const BorderSide(width: 0, color: Colors.black12)),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),
-              borderSide: BorderSide(width: 0, color: Colors.black12)),
-          labelStyle: TextStyle(color: Colors.blue),
-          prefixIcon: Icon(Icons.lock, color: Colors.blue),
+              borderSide: const BorderSide(width: 0, color: Colors.black12)),
+          labelStyle: const TextStyle(color: Colors.blue),
+          prefixIcon: const Icon(Icons.lock, color: Colors.blue),
         ),
       ),
     );
@@ -191,7 +192,7 @@ class _LoginContainerState extends State<LoginContainer> {
 
   Widget _buildButtonSignIn(Function onPress) {
     return Container(
-        margin: EdgeInsets.only(top: 20),
+        margin: const EdgeInsets.only(top: 20),
         child: ElevatedButtonTheme(
             data: ElevatedButtonThemeData(
                 style: ButtonStyle(
@@ -205,10 +206,10 @@ class _LoginContainerState extends State<LoginContainer> {
               }),
               elevation: MaterialStateProperty.all(5),
               padding: MaterialStateProperty.all(
-                  EdgeInsets.symmetric(vertical: 5, horizontal: 100)),
+                  const EdgeInsets.symmetric(vertical: 5, horizontal: 100)),
             )),
             child: ElevatedButton(
-              child: Text("Login",
+              child: const Text("Login",
                   style: TextStyle(fontSize: 18, color: Colors.white)),
               onPressed: () => onPress(),
             )));

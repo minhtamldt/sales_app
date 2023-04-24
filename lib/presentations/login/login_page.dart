@@ -39,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         title: const Text('Login'),
       ),
-      child: LoginContainer()
+      child: const LoginContainer()
     );
   }
 }

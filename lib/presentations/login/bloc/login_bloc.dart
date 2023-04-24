@@ -1,7 +1,12 @@
 import 'package:sales_app/common/bases/base_bloc.dart';
 import 'package:sales_app/common/bases/base_event.dart';
+import 'package:sales_app/common/constants/preference_key.dart';
+import 'package:sales_app/data/remote/dto/request/login/login_request_dto.dart';
 import 'package:sales_app/data/remote/repositories/login/login_repositories.dart';
 import 'package:sales_app/presentations/login/bloc/login_event.dart';
+
+import '../../../data/local/cache/app_sharepreference.dart';
+import 'login_success_event.dart';
 
 class LoginBloc extends BaseBloc {
   late LoginRepository _loginRepository;
@@ -18,7 +23,24 @@ class LoginBloc extends BaseBloc {
     }
   }
 
-  void executeSignIn(LoginEvent event) {
-      
+  void executeSignIn(LoginEvent event) async {
+    //show loading
+    loadingSink.add(true);
+
+    var request = LoginRequestDto(email: event.email, password: event.password);
+
+    await _loginRepository?.loginAsync(request)
+        .then((userDto) {
+          AppSharePreference.setString(
+              key: PreferenceKey.TOKEN,
+              value: userDto.data?.token ?? ""
+          );
+          messageSink.add("Login success");
+          progressSink.add(LoginInSuccessEvent());
+        })
+        .catchError((e) {
+          messageSink.add(e.toString());
+        })
+        .whenComplete(() => loadingSink.add(false));
   }
 }
