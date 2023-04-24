@@ -1,27 +1,27 @@
+import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
-// ignore: must_be_immutable
-class LoginRequestDto extends Equatable {
-	late String email;
-	final String password;
+import '../base_request_dto.dart';
 
-	LoginRequestDto({required this.email, required this.password});
+class LoginRequestDto extends BaseRequestDto {
+	final String? email;
+	final String? password;
 
+	LoginRequestDto({this.email, this.password});
+
+  @override
+	List<Object?> get props => [email, password];
+
+	factory LoginRequestDto.fromMap(Map<String, dynamic> data) {
+		return LoginRequestDto(
+			email: data['email'] as String?,
+			password: data['password'] as String?,
+		);
+	}
+
+  @override
 	Map<String, dynamic> toJson() => {
 				'email': email,
 				'password': password,
 			};
-
-	LoginRequestDto copyWith({
-		String? email,
-		String? password,
-	}) {
-		return LoginRequestDto(
-			email: email ?? this.email,
-			password: password ?? this.password,
-		);
-	}
-
-	@override
-	List<Object?> get props => [email, password];
 }
