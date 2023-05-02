@@ -4,7 +4,7 @@ import 'package:sales_app/common/bases/page_container.dart';
 import 'package:sales_app/data/remote/repositories/login/login_repositories.dart';
 import 'package:sales_app/data/remote/restapi/rest_api.dart';
 import 'package:sales_app/presentations/login/bloc/login_bloc.dart';
-import 'package:sales_app/presentations/login/login_container.dart';
+import 'package:sales_app/presentations/login/login_widget.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -36,10 +36,7 @@ class _LoginPageState extends State<LoginPage> {
           },
         )
       ],
-      appBar: AppBar(
-        title: const Text('Login'),
-      ),
-      child: const LoginContainer()
+      child: const LoginWidget()
     );
   }
 }

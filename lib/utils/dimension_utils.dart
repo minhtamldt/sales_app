@@ -13,7 +13,7 @@ class DimensionUtils {
     return MediaQuery.of(context).size.width / divideNumber;
   }
 
-  static double paddingHeightDivideNumber(BuildContext context, [int divideNumber = 20]) {
+  static double paddingHeightDivideNumber(BuildContext context, [int divideNumber = 30]) {
     return MediaQuery.of(context).size.height / divideNumber;
   }
 
