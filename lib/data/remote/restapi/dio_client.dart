@@ -4,18 +4,22 @@ import 'package:sales_app/common/constants/preference_key.dart';
 import '../../local/cache/app_sharepreference.dart';
 
 class DioClient {
-  Dio? _dio;
-  static final BaseOptions _options = BaseOptions(
-    baseUrl: ApiConstant.HOST,
-    connectTimeout: const Duration(seconds: 3),
-    receiveTimeout: const Duration(seconds: 3),
-  );
-
+  static const Duration TIME_OUT = Duration(seconds: 10);
   static final DioClient instance = DioClient._internal();
 
+  Dio? _dio;
+  Dio get dio => _dio!;
+
   DioClient._internal() {
+
     if (_dio == null){
-      _dio = Dio(_options);
+      var baseOption = BaseOptions(
+        baseUrl: ApiConstant.HOST,
+        connectTimeout: TIME_OUT,
+        receiveTimeout: TIME_OUT,
+      );
+
+      _dio = Dio(baseOption);
       _dio!.interceptors.add(LogInterceptor(requestBody: true));
       _dio!.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
         String token = AppSharePreference.getString(PreferenceKey.TOKEN);
@@ -24,6 +28,4 @@ class DioClient {
       }));
     }
   }
-
-  Dio get dio => _dio!;
 }
