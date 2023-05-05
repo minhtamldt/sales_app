@@ -14,15 +14,15 @@ class RestApi {
     _dio = DioClient.instance.dio;
   }
 
-  Future<BaseResponeDto?> sendGetAsync(String url, BaseRequestDto request) async {
+  Future<Response> sendGetAsync(String url, BaseRequestDto request) async {
     final body = jsonEncode(request.toJson());
-    var rs = await _dio.get<BaseResponeDto>(url, data: body);
-    return rs.data;
+    var rs = await _dio.get(url, data: body);
+    return rs;
   }
 
-    Future<BaseResponeDto?> sendPostAsync(String url, BaseRequestDto request) async {
+  Future<Response> sendPostAsync(String url, BaseRequestDto request) async {
     final body = jsonEncode(request.toJson());
     var rs = await _dio.post(url, data: body);
-    return rs.data;
+    return rs;
   }
 }

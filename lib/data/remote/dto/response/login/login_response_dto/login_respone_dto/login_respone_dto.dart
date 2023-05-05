@@ -6,9 +6,9 @@ import 'package:sales_app/data/remote/dto/response/base_response_dto.dart';
 
 import 'data.dart';
 
-class LoginResponeDto extends BaseResponeDto {
+class LoginResponeDto {
 	final int? result;
-	final Data? data;
+	final UserDto? data;
 	final String? message;
 
 	LoginResponeDto({this.result, this.data, this.message});
@@ -18,14 +18,9 @@ class LoginResponeDto extends BaseResponeDto {
 			result: data['result'] as int?,
 			data: data['data'] == null
 						? null
-						: Data.fromMap(data['data'] as Map<String, dynamic>),
+						: UserDto.fromMap(data['data'] as Map<String, dynamic>),
 			message: data['message'] as String?,
 		);
-	}
-
-  /// Parses the string and returns the resulting Json object as [LoginResponeDto].
-	factory LoginResponeDto.fromJson(String data) {
-		return LoginResponeDto.fromMap(json.decode(data) as Map<String, dynamic>);
 	}
 
 	@override

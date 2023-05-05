@@ -100,7 +100,8 @@ class _LoginContainerState extends State<LoginWidget> {
                                   ],
                                 ),
                               ),
-                              Expanded(child: _buildTextSignUp())
+                              Expanded(child: _buildTextSignUp()),
+                              const SizedBox(height: 20),
                             ],
                           ),
                         )),

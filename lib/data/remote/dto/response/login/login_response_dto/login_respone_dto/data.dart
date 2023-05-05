@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class Data extends Equatable {
+class UserDto extends Equatable {
 	final String? email;
 	final String? name;
 	final String? phone;
@@ -10,7 +10,7 @@ class Data extends Equatable {
 	final DateTime? registerDate;
 	final String? token;
 
-	const Data({
+	const UserDto({
 		this.email, 
 		this.name, 
 		this.phone, 
@@ -19,7 +19,7 @@ class Data extends Equatable {
 		this.token, 
 	});
 
-	factory Data.fromMap(Map<String, dynamic> data) => Data(
+	factory UserDto.fromMap(Map<String, dynamic> data) => UserDto(
 				email: data['email'] as String?,
 				name: data['name'] as String?,
 				phone: data['phone'] as String?,
@@ -42,8 +42,8 @@ class Data extends Equatable {
   /// `dart:convert`
   ///
   /// Parses the string and returns the resulting Json object as [Data].
-	factory Data.fromJson(String data) {
-		return Data.fromMap(json.decode(data) as Map<String, dynamic>);
+	factory UserDto.fromJson(String data) {
+		return UserDto.fromMap(json.decode(data) as Map<String, dynamic>);
 	}
   /// `dart:convert`
   ///
